@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import Search from "@/components/Search";
 import { useState } from "react";
 
 const categories = [
@@ -18,9 +19,12 @@ const categories = [
 
 export default function Sidebar() {
   const [age, setAge] = useState([25, 55]);
+  const [searchValue, setSearchValue] = useState("");
 
   const sidebarContent = (
     <div className="space-y-8">
+      <h2 className="text-xl font-bold">Search {`&`} Filter</h2>
+      <Search value={searchValue} setValue={setSearchValue} />
       <div>
         <h3 className="text-lg font-semibold mb-4">Categories</h3>
         <div className="space-y-2">

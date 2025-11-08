@@ -4,26 +4,31 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
+import { pins } from "@/data/pins";
 
 const chatMock = [
-  { id: 1, name: "Chat 1", lastMessage: "Hello there!" },
-  { id: 2, name: "Chat 2", lastMessage: "How are you?" },
+  { id: 1, name: "Alice", lastMessage: "Hey, are you going to the event?" },
+  { id: 2, name: "Bob", lastMessage: "See you at the park!" },
+  { id: 3, name: "Charlie", lastMessage: "Thanks for the info!" },
 ];
 
 const groupMock = [
-  { id: 1, name: "Group 1", members: 5 },
-  { id: 2, name: "Group 2", members: 10 },
+  { id: 1, name: "Hackaton Team", members: 8 },
+  { id: 2, name: "Local Explorers", members: 15 },
+  { id: 3, name: "Tech Enthusiasts", members: 22 },
 ];
 
 const friendsMock = [
-  { id: 1, name: "Friend 1", status: "Online" },
-  { id: 2, name: "Friend 2", status: "Offline" },
+  { id: 1, name: "Alice", status: "Online" },
+  { id: 2, name: "Bob", status: "Offline" },
+  { id: 3, name: "Charlie", status: "Online" },
 ];
 
-const favoritesMock = [
-  { id: 1, name: "Favorite 1", type: "Place" },
-  { id: 2, name: "Favorite 2", type: "Event" },
-];
+const favoritesMock = pins.slice(0, 5).map((pin) => ({
+  id: pin.id,
+  name: pin.label || pin.id,
+  type: "Place",
+}));
 
 export default function RightSideBar({
   category,
