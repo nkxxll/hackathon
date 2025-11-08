@@ -64,7 +64,7 @@ export default function RightSideBar({
 
   return (
     <Sheet open={!!category} onOpenChange={(open) => !open && onClose()}>
-      <SheetContent side="right" className="w-128">
+      <SheetContent side="right" className="w-[80vw] md:w-128 lg:w-128">
         <SheetHeader>
           <SheetTitle>{title}</SheetTitle>
         </SheetHeader>

@@ -36,9 +36,13 @@ export function Chats({ onClick }: { onClick: () => void }) {
   );
 }
 
-export default function TopBar({ onCategorySelect }: { onCategorySelect: (category: string) => void }) {
+export default function TopBar({
+  onCategorySelect,
+}: {
+  onCategorySelect: (category: string) => void;
+}) {
   return (
-    <div className="fixed top-1 left-15 p-4 flex gap-2 z-20">
+    <div className="fixed top-1 left-15 p-4 flex gap-2 z-20 max-w-[80vw] overflow-auto">
       <Favorites onClick={() => onCategorySelect("favorites")} />
       <Groups onClick={() => onCategorySelect("groups")} />
       <Friends onClick={() => onCategorySelect("friends")} />

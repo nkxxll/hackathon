@@ -41,3 +41,16 @@
 ## Feature
 
 - splitwise
+
+## todo
+
+- filter by text
+- filter by category
+- adjust categories
+- make qr code
+- add mock event data
+
+- metropolregion rheinneckar
+  - **kultur**
+  - essen
+  - cafe

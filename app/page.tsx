@@ -24,7 +24,10 @@ export default function LudwigshafenMap() {
     <div className="relative w-screen h-screen max-h-screen max-w-screen overflow-hidden">
       <Sidebar />
       <TopBar onCategorySelect={setSelectedCategory} />
-      <RightSideBar category={selectedCategory} onClose={() => setSelectedCategory(null)} />
+      <RightSideBar
+        category={selectedCategory}
+        onClose={() => setSelectedCategory(null)}
+      />
       <Map
         {...viewState}
         onMove={(evt) => setViewState(evt.viewState)}
@@ -65,8 +68,10 @@ export default function LudwigshafenMap() {
                 e.stopPropagation();
                 setSelectedPin(pin.id);
               }}
-              className="cursor-pointer bg-red-500 w-4 h-4 rounded-full border-2 border-white"
-            />
+              className="text-4xl"
+            >
+              🥐
+            </div>
           </Marker>
         ))}
         {selectedPin &&
