@@ -3,15 +3,65 @@ export interface Pin {
   latitude: number;
   longitude: number;
   imgSrc?: string;
+  navi: string;
   label?: string;
 }
 
 export const pins: Pin[] = [
   {
+    id: "Casper",
+    latitude: 49.48344,
+    longitude: 8.44619,
+    imgSrc: "",
+    navi: "https://maps.app.goo.gl/jjtgNd3i7yCmyLpYA",
+    label: "Cafe Bar Caspar",
+  },
+  {
+    id: "Duymac",
+    latitude: 49.48222,
+    longitude: 8.44782,
+    imgSrc: "",
+    navi: "https://maps.app.goo.gl/g9bkPgC63zkLbRZdA",
+    label: "Duymac's Café",
+  },
+  {
+    id: "Hanem",
+    latitude: 49.48551,
+    longitude: 8.42125,
+    imgSrc: "",
+    navi: "https://maps.app.goo.gl/xwjw2HmWMYXWU9c26",
+    label: "Hanem Cafe Restaurant",
+  },
+  {
+    id: "Alex",
+    latitude: 49.47971,
+    longitude: 8.44947,
+    imgSrc: "",
+    navi: "https://maps.app.goo.gl/vLToN77jNumLo2Zo8",
+    label: "ALEX Ludwigshafen",
+  },
+  {
+    id: "Café-Rad",
+    latitude: 49.47338,
+    longitude: 8.44886,
+    imgSrc: "",
+    navi: "https://maps.app.goo.gl/59TA22d34CKqXJzM7",
+    label: "Café-Rad",
+  },
+  {
+    id: "Görtz",
+    latitude: 49.47224,
+    longitude: 8.4487,
+    imgSrc: "/goertz.jpg",
+    navi: "https://maps.app.goo.gl/f8Et7UUDF7yvx2of9",
+    label: "Bäcker Görtz",
+  },
+  {
     id: "testtesttest",
     latitude: 49.479563,
     longitude: 8.455378,
     imgSrc: "/test.png",
+    navi: "",
     label: "testtesttest",
   },
   {
@@ -19,6 +69,7 @@ export const pins: Pin[] = [
     latitude: 49.47425,
     longitude: 8.44777,
     imgSrc: "",
+    navi: "https://maps.app.goo.gl/wFMh1Ze3WxE7q6v49",
     label: "Café Palpito",
   },
   {
@@ -26,6 +77,7 @@ export const pins: Pin[] = [
     latitude: 49.472,
     longitude: 8.45361,
     imgSrc: "barbarossa.jpg",
+    navi: "https://maps.app.goo.gl/HjqPLHGLcPz7a9n9A",
     label: "Barbarossa Bäckerei",
   },
 ];

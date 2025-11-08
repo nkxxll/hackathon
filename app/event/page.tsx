@@ -12,6 +12,7 @@ export default function EventShow() {
           open={show}
           onClose={() => setShow(false)}
           imageSource="/barbarossa.jpg"
+          navigation="https://maps.app.goo.gl/VB52PA6cTTVnvZ8C6"
         />
       )}
     </>

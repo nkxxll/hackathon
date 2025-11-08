@@ -4,14 +4,25 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export interface EventProps {
   open: boolean;
   imageSource: string;
+  navigation: string;
+  label: string;
   onClose: () => void;
 }
 
-export function Event({ open, imageSource, onClose }: EventProps) {
+export function Event({
+  open,
+  imageSource,
+  onClose,
+  navigation,
+  label,
+}: EventProps) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
@@ -25,7 +36,7 @@ export function Event({ open, imageSource, onClose }: EventProps) {
             className="w-full h-48 object-cover rounded-lg"
           />
           <div className="space-y-2">
-            <h2 className="text-xl font-semibold">Event Title Placeholder</h2>
+            <h2 className="text-xl font-semibold">{label}</h2>
             <p className="text-sm text-muted-foreground">
               Date: Placeholder Date
             </p>
@@ -40,6 +51,11 @@ export function Event({ open, imageSource, onClose }: EventProps) {
               details will be added here.
             </p>
           </div>
+          <Link href={navigation}>
+            <Button>
+              Navigation <ArrowRight />
+            </Button>
+          </Link>
         </div>
       </DialogContent>
     </Dialog>

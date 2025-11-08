@@ -7,6 +7,8 @@ import Sidebar from "@/components/Sidebar";
 import { pins } from "@/data/pins";
 import { Event } from "@/components/EventPopup";
 import "maplibre-gl/dist/maplibre-gl.css";
+import TopBar from "@/components/TopBarElements";
+import RightSideBar from "@/components/RightSideBar";
 
 export default function LudwigshafenMap() {
   const [viewState, setViewState] = useState({
@@ -16,10 +18,13 @@ export default function LudwigshafenMap() {
   });
 
   const [selectedPin, setSelectedPin] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   return (
     <div className="relative w-screen h-screen max-h-screen max-w-screen overflow-hidden">
       <Sidebar />
+      <TopBar onCategorySelect={setSelectedCategory} />
+      <RightSideBar category={selectedCategory} onClose={() => setSelectedCategory(null)} />
       <Map
         {...viewState}
         onMove={(evt) => setViewState(evt.viewState)}
@@ -79,6 +84,8 @@ export default function LudwigshafenMap() {
                   open={true}
                   imageSource={pin.imgSrc || ""}
                   onClose={() => setSelectedPin(null)}
+                  navigation={pin.navi}
+                  label={pin.label || ""}
                 />
               </Popup>
             );
