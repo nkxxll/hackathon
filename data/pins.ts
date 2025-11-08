@@ -2,7 +2,7 @@ export interface Pin {
   id: string;
   latitude: number;
   longitude: number;
-  icon: string;
+  imgSrc?: string;
   label?: string;
 }
 
@@ -11,28 +11,21 @@ export const pins: Pin[] = [
     id: "testtesttest",
     latitude: 49.479563,
     longitude: 8.455378,
-    icon: "/icons/park.svg",
+    imgSrc: "/test.png",
     label: "testtesttest",
   },
   {
-    id: "hemshofpark",
-    latitude: 49.482,
-    longitude: 8.449,
-    icon: "/icons/park.svg",
-    label: "Hemshofpark",
+    id: "Cafe Papito",
+    latitude: 49.47425,
+    longitude: 8.44777,
+    imgSrc: "",
+    label: "Café Palpito",
   },
   {
-    id: "restaurant-am-rhein",
-    latitude: 49.475,
-    longitude: 8.445,
-    icon: "/icons/restaurant.svg",
-    label: "Restaurant am Rhein",
-  },
-  {
-    id: "wilhelm-hack-museum",
-    latitude: 49.475,
-    longitude: 8.444,
-    icon: "/icons/museum.svg",
-    label: "Wilhelm-Hack-Museum",
+    id: "barbarossa",
+    latitude: 49.472,
+    longitude: 8.45361,
+    imgSrc: "barbarossa.jpg",
+    label: "Barbarossa Bäckerei",
   },
 ];
