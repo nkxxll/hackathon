@@ -4,6 +4,8 @@ import { useState } from "react";
 import Map, { Popup } from "react-map-gl/maplibre";
 import { Marker } from "react-map-gl/maplibre";
 import Sidebar from "@/components/Sidebar";
+import { pins } from "@/data/pins";
+import { Event } from "@/components/EventPopup";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 export default function LudwigshafenMap() {
@@ -13,7 +15,7 @@ export default function LudwigshafenMap() {
     zoom: 13,
   });
 
-  const [showPopup, setShowPopup] = useState(false);
+  const [selectedPin, setSelectedPin] = useState<string | null>(null);
 
   return (
     <div className="relative w-screen h-screen max-h-screen max-w-screen overflow-hidden">
@@ -46,30 +48,41 @@ export default function LudwigshafenMap() {
         minZoom={12}
         maxZoom={16}
       >
-        <Marker
-          key={`marker-test`}
-          latitude={49.479563}
-          longitude={8.455378}
-          anchor="top"
-        >
-          <div
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowPopup(true);
-            }}
-            className="cursor-pointer bg-red-500 w-4 h-4 rounded-full border-2 border-white"
-          />
-        </Marker>
-        {showPopup && (
-          <Popup
-            longitude={8.455378}
-            latitude={49.479563}
+        {pins.map((pin) => (
+          <Marker
+            key={pin.id}
+            latitude={pin.latitude}
+            longitude={pin.longitude}
             anchor="top"
-            closeButton={false}
           >
-            <Event />
-          </Popup>
-        )}
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedPin(pin.id);
+              }}
+              className="cursor-pointer bg-red-500 w-4 h-4 rounded-full border-2 border-white"
+            />
+          </Marker>
+        ))}
+        {selectedPin &&
+          (() => {
+            const pin = pins.find((p) => p.id === selectedPin)!;
+            return (
+              <Popup
+                longitude={pin.longitude}
+                latitude={pin.latitude}
+                anchor="top"
+                onClose={() => setSelectedPin(null)}
+                closeButton={false}
+              >
+                <Event
+                  open={true}
+                  imageSource={pin.imgSrc || ""}
+                  onClose={() => setSelectedPin(null)}
+                />
+              </Popup>
+            );
+          })()}
       </Map>
     </div>
   );
