@@ -1,65 +1,101 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useMemo, useState } from "react";
+import { pins, type Pin } from "../data/pins";
+import Map from "react-map-gl/maplibre";
+import { Marker, Popup } from "react-map-gl/maplibre";
+import Sidebar from "@/components/Sidebar";
+
+const ICON = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4.5,2,10c0,2,0.6,3.9,1.6,5.4c0,0.1,0.1,0.2,0.2,0.3
+  c0,0,0.1,0.1,0.1,0.2c0.2,0.3,0.4,0.6,0.7,0.9c2.6,3.1,7.4,7.6,7.4,7.6s4.8-4.5,7.4-7.5c0.2-0.3,0.5-0.6,0.7-0.9
+  C20.1,15.8,20.2,15.8,20.2,15.7z`;
+
+const pinStyle = {
+  cursor: "pointer",
+  fill: "#d00",
+  stroke: "none",
+};
+
+function Pin({ size = 20 }) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <svg height={size} viewBox="0 0 24 24" style={{ cursor: "pointer" }}>
+      <path d={ICON} style={pinStyle} />
+    </svg>
+  );
+}
+
+export default function LudwigshafenMap() {
+  const [viewState, setViewState] = useState({
+    longitude: 8.446,
+    latitude: 49.477,
+    zoom: 13,
+  });
+  const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
+
+  const pinMarker = useMemo(
+    () =>
+      pins.map((pin, index) => (
+        <Marker
+          style={{ zIndex: 20 }}
+          key={`marker-${index}`}
+          longitude={pin.longitude}
+          latitude={pin.latitude}
+          anchor="top"
+          onClick={(e) => {
+            e.originalEvent.stopPropagation();
+            setSelectedPin(pin);
+          }}
+        >
+          <Pin />
+        </Marker>
+      )),
+    [],
+  );
+
+  return (
+    <div className="relative w-screen h-screen max-h-screen max-w-screen overflow-hidden">
+      <Sidebar />
+      <Map
+        {...viewState}
+        onMove={(evt) => setViewState(evt.viewState)}
+        style={{ width: "100%", height: "100%" }}
+        mapStyle={{
+          version: 8,
+          sources: {
+            osm: {
+              type: "raster",
+              tiles: ["https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"],
+              tileSize: 256,
+              attribution:
+                '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            },
+          },
+          layers: [
+            {
+              id: "osm-layer",
+              type: "raster",
+              source: "osm",
+            },
+          ],
+        }}
+        dragRotate={false}
+        touchPitch={false}
+        minZoom={13}
+        maxZoom={16}
+      >
+        {pinMarker}
+        {selectedPin && (
+          <Popup
+            longitude={selectedPin.longitude}
+            latitude={selectedPin.latitude}
+            onClose={() => setSelectedPin(null)}
+            closeButton={true}
+            closeOnClick={false}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+            <div>{selectedPin.label}</div>
+          </Popup>
+        )}
+      </Map>
     </div>
   );
 }
