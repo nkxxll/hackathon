@@ -87,7 +87,7 @@ export default function LudwigshafenMap() {
               >
                 <Event
                   open={true}
-                  imageSource={pin.imgSrc || ""}
+                  imageSource={pin.imgSrc || "brunch.png"}
                   onClose={() => setSelectedPin(null)}
                   navigation={pin.navi}
                   label={pin.label || ""}

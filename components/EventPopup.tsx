@@ -38,17 +38,18 @@ export function Event({
           <div className="space-y-2">
             <h2 className="text-xl font-semibold">{label}</h2>
             <p className="text-sm text-muted-foreground">
-              Date: Placeholder Date
+              Date: 09 November 2025
             </p>
             <p className="text-sm text-muted-foreground">
-              Time: Placeholder Time
+              Time: 10:00 am - about 2:00 pm
             </p>
             <p className="text-sm text-muted-foreground">
-              Location: Placeholder Location
+              Location: Barbarossa Bäckerei, Rheinallee 1, 67061 Ludwigshafen am
+              Rhein
             </p>
             <p className="text-sm text-muted-foreground">
-              Description: This is a placeholder description for the event. More
-              details will be added here.
+              Description: Thanksgiving brunch with a selection of various
+              delicacies from our bakery
             </p>
           </div>
           <Link href={navigation}>
