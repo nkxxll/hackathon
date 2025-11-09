@@ -5,7 +5,7 @@ import { Slider } from "@/components/ui/slider";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Filter, Menu } from "lucide-react";
 import Search from "@/components/Search";
 import { useState } from "react";
 
@@ -63,7 +63,7 @@ export default function Sidebar() {
         <Sheet>
           <SheetTrigger asChild title="Sidebar">
             <Button variant="outline" size="icon">
-              <Menu className="h-4 w-4" />
+              <Filter className="h-4 w-4" />
             </Button>
           </SheetTrigger>
           <SheetContent side="left" title="SidebarContent">
