@@ -11,9 +11,9 @@ import { useState } from "react";
 
 const categories = [
   { id: "tech", label: "Technology" },
-  { id: "health", label: "Health & Wellness" },
+  { id: "riding", label: "Riding" },
   { id: "finance", label: "Finance" },
-  { id: "education", label: "Education" },
+  { id: "students", label: "Students" },
   { id: "art", label: "Art & Culture" },
 ];
 
